@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RolesEntity } from 'src/@core/entities/RolesEntity';
 import { UserEntity } from 'src/@core/entities/UserEntity';
+import { UserRolesEntity } from 'src/@core/entities/UserRolesEntity';
 import { DatabaseConfig } from 'src/shared/config/DatabaseConfig';
 import { JwtConfig } from 'src/shared/config/JwtConfig';
+import { Providers } from 'src/shared/providers/Providers';
 import { AppController } from '../controllers/AppController';
 import { AppService } from '../services/AppService';
 import { UserModule } from './UserModule';
@@ -13,11 +16,11 @@ import { UserModule } from './UserModule';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),
     JwtModule.register(JwtConfig.REGISTER),
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, JwtService],
+  providers: [AppService, JwtService, Providers.AUTH_GUARD],
 })
 export class AppModule {}

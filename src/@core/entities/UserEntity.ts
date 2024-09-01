@@ -1,7 +1,7 @@
 import { UserDTO } from 'src/shared/dtos/UserDTO';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('users')
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;

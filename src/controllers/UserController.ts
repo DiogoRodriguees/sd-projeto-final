@@ -1,7 +1,15 @@
-import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from 'src/services/UserModule';
 import { ResponseDTO } from 'src/shared/dtos/Response';
 import { UserDTO } from 'src/shared/dtos/UserDTO';
+import { AuthGuard } from 'src/shared/guards/AuthGuard';
 
 @Controller('/users')
 export class UserController {
@@ -14,6 +22,7 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   async list() {
     const users = await this.userService.list();
     return new ResponseDTO(HttpStatus.OK, 'Success on list users', users);
