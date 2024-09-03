@@ -1,0 +1,1 @@
+{"version":3,"file":"DatabaseConfig.js","sourceRoot":"","sources":["../../../src/shared/config/DatabaseConfig.ts"],"names":[],"mappings":";;;AAEA,MAAa,cAAc;;AAA3B,wCAQC;AAPe,uBAAQ,GAAyB;IAC7C,IAAI,EAAE,QAAQ;IACd,QAAQ,EAAE,iBAAiB;IAE3B,gBAAgB,EAAE,IAAI;IACtB,WAAW,EAAE,IAAI;CAClB,CAAC"}
