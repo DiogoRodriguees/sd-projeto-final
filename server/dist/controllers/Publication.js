@@ -14,18 +14,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PublicationsController = void 0;
 const common_1 = require("@nestjs/common");
+const PublicationService_1 = require("../services/PublicationService");
+const PublicationDTO_1 = require("../shared/dtos/PublicationDTO");
+const Request_1 = require("../shared/dtos/Request");
 const Response_1 = require("../shared/dtos/Response");
 const AuthGuard_1 = require("../shared/guards/AuthGuard");
 let PublicationsController = class PublicationsController {
-    constructor() { }
+    constructor(publicationService) {
+        this.publicationService = publicationService;
+    }
     async create(req, publicationDTO) {
-        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on create publication');
+        const data = await this.publicationService.create(req.user.id, publicationDTO);
+        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on create publication', data);
     }
     async markAsInteressed(req, publicationID) {
         return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on mark publication', []);
     }
-    async listByUser() {
-        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on list publications', []);
+    async list() {
+        const publications = await this.publicationService.list();
+        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on list publications', publications);
     }
 };
 exports.PublicationsController = PublicationsController;
@@ -35,7 +42,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Request_1.Request, PublicationDTO_1.PublicationDTO]),
     __metadata("design:returntype", Promise)
 ], PublicationsController.prototype, "create", null);
 __decorate([
@@ -53,9 +60,9 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], PublicationsController.prototype, "listByUser", null);
+], PublicationsController.prototype, "list", null);
 exports.PublicationsController = PublicationsController = __decorate([
     (0, common_1.Controller)('/publications'),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [PublicationService_1.PublicationService])
 ], PublicationsController);
 //# sourceMappingURL=Publication.js.map

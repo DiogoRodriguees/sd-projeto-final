@@ -20,6 +20,7 @@ let AuthGuard = class AuthGuard {
     async canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
+        common_1.Logger.log(request.url);
         if (!token) {
             throw new common_1.UnauthorizedException();
         }
@@ -27,7 +28,6 @@ let AuthGuard = class AuthGuard {
             const payload = await this.jwtService.verifyAsync(token, {
                 secret: JwtConfig_1.JwtConfig.SECRET,
             });
-            console.log(payload);
             request['user'] = payload;
         }
         catch {
