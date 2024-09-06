@@ -16,16 +16,16 @@ export class PublicationsController {
     return new ResponseDTO(HttpStatus.OK, 'Success on create publication', data);
   }
 
-  @Post('/interesse/:id')
-  @UseGuards(AuthGuard)
-  async markAsInteressed(@Req() req: any, @Param('id') publicationID: number) {
-    return new ResponseDTO(HttpStatus.OK, 'Success on mark publication', []);
-  }
-
   @Get()
   @UseGuards(AuthGuard)
   async list() {
     const publications = await this.publicationService.list();
     return new ResponseDTO(HttpStatus.OK, 'Success on list publications', publications);
+  }
+
+  @Post('/interesse/:id')
+  @UseGuards(AuthGuard)
+  async markAsInteressed(@Req() req: any, @Param('id') publicationID: number) {
+    return new ResponseDTO(HttpStatus.OK, 'Success on mark publication', []);
   }
 }

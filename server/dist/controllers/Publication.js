@@ -27,12 +27,12 @@ let PublicationsController = class PublicationsController {
         const data = await this.publicationService.create(req.user.id, publicationDTO);
         return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on create publication', data);
     }
-    async markAsInteressed(req, publicationID) {
-        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on mark publication', []);
-    }
     async list() {
         const publications = await this.publicationService.list();
         return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on list publications', publications);
+    }
+    async markAsInteressed(req, publicationID) {
+        return new Response_1.ResponseDTO(common_1.HttpStatus.OK, 'Success on mark publication', []);
     }
 };
 exports.PublicationsController = PublicationsController;
@@ -46,6 +46,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PublicationsController.prototype, "create", null);
 __decorate([
+    (0, common_1.Get)(),
+    (0, common_1.UseGuards)(AuthGuard_1.AuthGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], PublicationsController.prototype, "list", null);
+__decorate([
     (0, common_1.Post)('/interesse/:id'),
     (0, common_1.UseGuards)(AuthGuard_1.AuthGuard),
     __param(0, (0, common_1.Req)()),
@@ -54,13 +61,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], PublicationsController.prototype, "markAsInteressed", null);
-__decorate([
-    (0, common_1.Get)(),
-    (0, common_1.UseGuards)(AuthGuard_1.AuthGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], PublicationsController.prototype, "list", null);
 exports.PublicationsController = PublicationsController = __decorate([
     (0, common_1.Controller)('/publications'),
     __metadata("design:paramtypes", [PublicationService_1.PublicationService])

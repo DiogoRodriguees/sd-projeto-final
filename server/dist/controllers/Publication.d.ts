@@ -6,6 +6,6 @@ export declare class PublicationsController {
     private readonly publicationService;
     constructor(publicationService: PublicationService);
     create(req: Request, publicationDTO: PublicationDTO): Promise<ResponseDTO<import("../@core/entities/PublicationEntity").PublicationEntity>>;
-    markAsInteressed(req: any, publicationID: number): Promise<ResponseDTO<any[]>>;
     list(): Promise<ResponseDTO<import("../@core/entities/PublicationEntity").PublicationEntity[]>>;
+    markAsInteressed(req: any, publicationID: number): Promise<ResponseDTO<any[]>>;
 }
