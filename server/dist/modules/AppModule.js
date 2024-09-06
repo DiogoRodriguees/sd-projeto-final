@@ -16,6 +16,7 @@ const UserEntity_1 = require("../@core/entities/UserEntity");
 const UserRolesEntity_1 = require("../@core/entities/UserRolesEntity");
 const DatabaseConfig_1 = require("../shared/config/DatabaseConfig");
 const JwtConfig_1 = require("../shared/config/JwtConfig");
+const Providers_1 = require("../shared/providers/Providers");
 const AppController_1 = require("../controllers/AppController");
 const AppService_1 = require("../services/AppService");
 const PublicationModule_1 = require("./PublicationModule");
@@ -34,7 +35,7 @@ exports.AppModule = AppModule = __decorate([
             PublicationModule_1.PublicationModule,
         ],
         controllers: [AppController_1.AppController],
-        providers: [AppService_1.AppService, jwt_1.JwtService],
+        providers: [AppService_1.AppService, jwt_1.JwtService, Providers_1.Providers.LOGGER_PROVIDER],
     })
 ], AppModule);
 //# sourceMappingURL=AppModule.js.map

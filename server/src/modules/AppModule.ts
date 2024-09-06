@@ -7,6 +7,7 @@ import { UserEntity } from 'src/@core/entities/UserEntity';
 import { UserRolesEntity } from 'src/@core/entities/UserRolesEntity';
 import { DatabaseConfig } from 'src/shared/config/DatabaseConfig';
 import { JwtConfig } from 'src/shared/config/JwtConfig';
+import { Providers } from 'src/shared/providers/Providers';
 import { AppController } from '../controllers/AppController';
 import { AppService } from '../services/AppService';
 import { PublicationModule } from './PublicationModule';
@@ -22,6 +23,6 @@ import { UserModule } from './UserModule';
     PublicationModule,
   ],
   controllers: [AppController],
-  providers: [AppService, JwtService],
+  providers: [AppService, JwtService, Providers.LOGGER_PROVIDER],
 })
 export class AppModule {}

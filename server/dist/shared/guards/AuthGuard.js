@@ -20,7 +20,6 @@ let AuthGuard = class AuthGuard {
     async canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
-        common_1.Logger.log(request.url);
         if (!token) {
             throw new common_1.UnauthorizedException();
         }
