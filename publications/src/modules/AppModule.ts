@@ -11,7 +11,6 @@ import { Providers } from 'src/shared/providers/Providers';
 import { AppController } from '../controllers/AppController';
 import { AppService } from '../services/AppService';
 import { PublicationModule } from './PublicationModule';
-import { UserModule } from './UserModule';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { UserModule } from './UserModule';
     TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
     TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),
     JwtModule.register(JwtConfig.REGISTER),
-    UserModule,
     PublicationModule,
   ],
   controllers: [AppController],
