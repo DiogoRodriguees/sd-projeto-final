@@ -1,6 +1,0 @@
-export declare class ResponseDTO<T> {
-    status: number;
-    message: string;
-    data: T;
-    constructor(status: number, message: string, data?: T);
-}
