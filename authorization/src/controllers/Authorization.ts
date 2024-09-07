@@ -3,8 +3,8 @@ import { AuthorizationService } from 'src/services/AuthorizationService';
 import { ResponseDTO } from 'src/shared/dtos/Response';
 import { UserDTO } from 'src/shared/dtos/UserDTO';
 
-@Controller()
-export class UserController {
+@Controller('auth')
+export class AuthController {
   constructor(private readonly userService: AuthorizationService) {}
 
   @Post('/sign-in')
