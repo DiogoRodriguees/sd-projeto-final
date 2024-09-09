@@ -1,10 +1,10 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+// import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('roles')
-export class RolesEntity {
-  @PrimaryColumn()
-  id: number;
+// @Entity('roles')
+// export class RolesEntity {
+//   @PrimaryColumn()
+//   id: number;
 
-  @Column()
-  label: string;
-}
+//   @Column()
+//   label: string;
+// }
