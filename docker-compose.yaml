@@ -1,0 +1,102 @@
+networks:
+    carolina-network:
+        driver: bridge
+
+volumes:
+    carolina-database:
+        driver: local
+
+services:
+    auth:
+        build:
+            context: ./authorization
+            dockerfile: dockerfile
+        image: carolina-auth-server:1.0
+        container_name: carolina-auth-server
+        hostname: carolina-auth-server
+        restart: always
+        ports:
+            - 3001:3000
+        volumes:
+            - ./authorization:/usr/src/app
+        command: ["yarn", "dev"]
+        depends_on:
+            - database
+        networks:
+            - carolina-network
+        deploy:
+            resources:
+                limits:
+                    memory: 300M
+    users:
+        build:
+            context: ./users
+            dockerfile: dockerfile
+        image: carolina-users-server:1.0
+        container_name: carolina-users-server
+        hostname: carolina-users-server
+        restart: always
+        ports:
+            - 3002:3000
+        volumes:
+            - ./users:/usr/src/app
+        command: ["yarn", "dev"]
+        depends_on:
+            - database
+        networks:
+            - carolina-network
+        deploy:
+            resources:
+                limits:
+                    memory: 300M
+    publications:
+        build:
+            context: ./publications
+            dockerfile: dockerfile
+        image: carolina-publications-server:1.0
+        container_name: carolina-publications-server
+        hostname: carolina-publications-server
+        restart: always
+        ports:
+            - 3003:3000
+        volumes:
+            - ./publications:/usr/src/app
+        command: ["yarn", "dev"]
+        depends_on:
+            - database
+        networks:
+            - carolina-network
+        deploy:
+            resources:
+                limits:
+                    memory: 300M
+
+    database:
+        image: postgres:latest
+        container_name: carolina-database
+        hostname: carolina-database
+        restart: always
+        ports:
+            - 5434:5432
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: admin
+        volumes:
+            - carolina-database:/var/lib/postgresql/data
+        networks:
+            - carolina-network
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: dockerfile
+        image: carolina-nginx:1.0
+        hostname: carolina-nginx
+        container_name: carolina-nginx
+        ports:
+            - 3000:3000
+        depends_on:
+            - auth
+            - users
+            - publications
+        networks:
+            - carolina-network
