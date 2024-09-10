@@ -21,21 +21,25 @@ const AppController_1 = require("../controllers/AppController");
 const AppService_1 = require("../services/AppService");
 const PublicationModule_1 = require("./PublicationModule");
 const UserModule_1 = require("./UserModule");
+const mailer_module_1 = require("../mailer/mailer.module");
+const path_1 = require("path");
+const mailer_service_1 = require("../mailer/mailer.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot(),
+            config_1.ConfigModule.forRoot({ envFilePath: (0, path_1.join)(__dirname, '../../configs.env'), isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot(DatabaseConfig_1.DatabaseConfig.REGISTER),
             typeorm_1.TypeOrmModule.forFeature([UserEntity_1.UserEntity, RolesEntity_1.RolesEntity, UserRolesEntity_1.UserRolesEntity]),
             jwt_1.JwtModule.register(JwtConfig_1.JwtConfig.REGISTER),
             UserModule_1.UserModule,
             PublicationModule_1.PublicationModule,
+            mailer_module_1.MailerModule,
         ],
         controllers: [AppController_1.AppController],
-        providers: [AppService_1.AppService, jwt_1.JwtService, Providers_1.Providers.LOGGER_PROVIDER],
+        providers: [AppService_1.AppService, jwt_1.JwtService, Providers_1.Providers.LOGGER_PROVIDER, mailer_service_1.MailerService],
     })
 ], AppModule);
 //# sourceMappingURL=AppModule.js.map

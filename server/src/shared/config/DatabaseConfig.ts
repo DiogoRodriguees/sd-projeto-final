@@ -6,14 +6,10 @@ import { UserRolesEntity } from 'src/@core/entities/UserRolesEntity';
 
 export class DatabaseConfig {
   public static REGISTER: TypeOrmModuleOptions = {
-    type: 'postgres',
-    host: 'localhost',
-    port: 5433,
-    username: 'admin',
-    password: 'admin',
-    database: 'distributed-system',
+    type: 'sqlite',
+    database: 'distributed-system.sqlite', // SQLite file
     entities: [UserEntity, RolesEntity, UserRolesEntity, PublicationEntity],
     autoLoadEntities: true,
-    synchronize: true,
+    synchronize: true, // Automatically synchronize the schema
   };
 }

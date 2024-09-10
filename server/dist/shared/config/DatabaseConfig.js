@@ -9,12 +9,8 @@ class DatabaseConfig {
 }
 exports.DatabaseConfig = DatabaseConfig;
 DatabaseConfig.REGISTER = {
-    type: 'postgres',
-    host: 'localhost',
-    port: 5433,
-    username: 'admin',
-    password: 'admin',
-    database: 'distributed-system',
+    type: 'sqlite',
+    database: 'distributed-system.sqlite',
     entities: [UserEntity_1.UserEntity, RolesEntity_1.RolesEntity, UserRolesEntity_1.UserRolesEntity, PublicationEntity_1.PublicationEntity],
     autoLoadEntities: true,
     synchronize: true,
