@@ -9,7 +9,7 @@ volumes:
 services:
     auth:
         build:
-            context: ./authorization
+            context: ./server/authorization
             dockerfile: dockerfile
         image: carolina-auth-server:1.0
         container_name: carolina-auth-server
@@ -30,7 +30,7 @@ services:
                     memory: 200M
     users:
         build:
-            context: ./users
+            context: ./server/users
             dockerfile: dockerfile
         image: carolina-users-server:1.0
         container_name: carolina-users-server
@@ -51,7 +51,7 @@ services:
                     memory: 200M
     publications:
         build:
-            context: ./publications
+            context: ./server/publications
             dockerfile: dockerfile
         image: carolina-publications-server:1.0
         container_name: carolina-publications-server
@@ -88,7 +88,7 @@ services:
 
     nginx:
         build:
-            context: ./nginx
+            context: ./server/nginx
             dockerfile: dockerfile
         image: carolina-nginx:1.0
         hostname: carolina-nginx
