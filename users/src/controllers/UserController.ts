@@ -27,21 +27,14 @@ export class UserController {
         return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong while creating user.');
       }
     } catch (error) {
-      throw new HttpException('Something went wrong while creating user.', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong while creating user.');
     }
   }
-
+  
   // @Get()
   // @UseGuards(AuthGuard)
   // async list() {
   //   const users = await this.userService.list();
   //   return new ResponseDTO(HttpStatus.OK, 'Success on list users', users);
-  // }
-
-  // @Post('/sign-in')
-  // async signIn(@Body() userDTO: UserDTO) {
-  //   const user = await this.userService.findByEmail(userDTO.email);
-  //   const authDTO = await this.userService.authenticate(user, userDTO);
-  //   return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', authDTO);
   // }
 }

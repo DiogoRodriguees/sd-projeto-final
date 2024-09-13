@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { CassandraService } from 'src/services/cassandra.service';
+import { CassandraService } from 'src/cassandra/cassandra.service';
 import { JwtConfig } from 'src/shared/config/JwtConfig';
 import { Providers } from 'src/shared/providers/Providers';
 import { AppController } from '../controllers/AppController';

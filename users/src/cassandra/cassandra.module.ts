@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CassandraService } from 'src/services/cassandra.service';
+import { CassandraService } from 'src/cassandra/cassandra.service';
 
 @Module({
   providers: [CassandraService],

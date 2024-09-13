@@ -41,7 +41,7 @@ export class CassandraService implements OnModuleInit, OnModuleDestroy {
 
       // Criando as tabelas
       await this.createUserTable();
-      // await this.createPostsTable();
+
       console.log('[Cassandra Service] Tabelas criadas com sucesso!');
 
     } catch (err) {
@@ -67,19 +67,6 @@ export class CassandraService implements OnModuleInit, OnModuleDestroy {
     return this.client.execute(query);
   }
 
-  // Método para criar uma tabela de publicações
-  async createPostsTable() {
-    const query = `
-      CREATE TABLE IF NOT EXISTS posts (
-        id UUID PRIMARY KEY,
-        author UUID,
-        title TEXT,
-        content TEXT
-      );
-    `;
-    return this.client.execute(query);
-  }
-
   // Método para inserir um novo usuário
   async saveUser(name: string, email: string, password: string) {
     const query = `
@@ -87,16 +74,6 @@ export class CassandraService implements OnModuleInit, OnModuleDestroy {
       VALUES (uuid(), ?, ?, ?);
     `;
     const params = [name, email, password];
-    return this.client.execute(query, params, { prepare: true });
-  }
-
-  // Método para inserir uma publicação
-  async createPost(author: string, title: string, content: string) {
-    const query = `
-      INSERT INTO posts (id, author, title, content)
-      VALUES (uuid(), ?, ?, ?);
-    `;
-    const params = [author, title, content];
     return this.client.execute(query, params, { prepare: true });
   }
 
