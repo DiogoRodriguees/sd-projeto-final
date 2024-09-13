@@ -9,8 +9,13 @@ export class AuthController {
 
   @Post('/sign-in')
   async signIn(@Body() userDTO: UserDTO) {
-    const user = await this.userService.findByEmail(userDTO.email);
-    const authDTO = await this.userService.authenticate(user, userDTO);
-    return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', authDTO);
+    try {
+      const user = await this.userService.findByEmail(userDTO.email);
+      const authDTO = await this.userService.authenticate(user, userDTO);
+      return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', authDTO);
+    }
+    catch (error) {
+      return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong while logging in: ' + error.message);
+    }
   }
 }
