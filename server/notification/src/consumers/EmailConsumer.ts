@@ -1,24 +1,15 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-
-class UserDTO {
-  name: string;
-  email: string;
-  password: string;
-
-  constructor(name: string, email: string, password: string) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-  }
-}
+import { EmailService } from 'src/services/EmailService';
+import { UserDTO } from 'src/shared/dtos/UserDTO';
 
 @Controller()
 export class EmailConsumer {
-  constructor() {}
+  constructor(private readonly emailService: EmailService) {}
 
   @MessagePattern('NOTIFICATE_LOGIN')
   public async notificateUserCreated(userDTO: UserDTO) {
     console.log(userDTO);
+    await this.emailService.sendMail('diogorodrigueslife@gmail.com', 'Login registrado', 'Você fez um novo login na plataforma');
   }
 }
