@@ -5,7 +5,7 @@ export const EmailClientConfig: ClientsModuleOptions = [
     name: 'EMAIL_CLIENT',
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://guest:guest@rabbitmq:5672'],
+      urls: [process.env.RABBITMQ_URL],
       queue: 'EMAIL_QUEUE',
       queueOptions: {
         durable: false,

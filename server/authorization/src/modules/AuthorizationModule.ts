@@ -1,15 +1,31 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule } from '@nestjs/microservices';
+import { ConfigModule } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/@core/entities/UserEntity';
 import { AuthController } from 'src/controllers/Authorization';
 import { AuthorizationRepository } from 'src/repositories/UserRepository';
 import { AuthorizationService } from 'src/services/AuthorizationService';
-import { EmailClientConfig } from 'src/shared/config/EmailClientConfig';
 import { EmailClient } from 'src/shared/productors/EmailClient';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), ClientsModule.register(EmailClientConfig)],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forFeature([UserEntity]),
+    ClientsModule.register([
+      {
+        name: 'EMAIL_CLIENT',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://guest:guest@localhost:5672'],
+          queue: 'EMAIL_QUEUE',
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
+    ]),
+  ],
   controllers: [AuthController],
   providers: [AuthorizationService, EmailClient, AuthorizationRepository],
 })

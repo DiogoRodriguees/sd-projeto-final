@@ -14,7 +14,9 @@ import { PublicationModule } from './PublicationModule';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+  envFilePath: '../.env',
+}),
     TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
     TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),
     JwtModule.register(JwtConfig.REGISTER),

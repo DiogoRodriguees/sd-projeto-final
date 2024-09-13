@@ -8,7 +8,7 @@ export class DatabaseConfig {
   public static REGISTER: TypeOrmModuleOptions = {
     type: 'postgres',
     host: 'localhost',
-    port: 5433,
+    port: Number(process.env.DATABASE_PORT),
     username: 'admin',
     password: 'admin',
     database: 'postgres',

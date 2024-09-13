@@ -9,7 +9,9 @@ import { Providers } from 'src/shared/providers/Providers';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: '../.env',
+    }),
     TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
     TypeOrmModule.forFeature([]),
     JwtModule.register(JwtConfig.REGISTER),

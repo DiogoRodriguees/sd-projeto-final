@@ -9,7 +9,7 @@ volumes:
 services:
     auth:
         build:
-            context: ./server/authorization
+            context: ./authorization
             dockerfile: dockerfile
         image: carolina-auth-server:1.0
         container_name: carolina-auth-server
@@ -18,7 +18,7 @@ services:
         ports:
             - 3001:3000
         volumes:
-            - ./server/authorization:/usr/src/app
+            - ./authorization:/usr/src/app
         command: ["yarn", "dev"]
         depends_on:
             - database
@@ -31,7 +31,7 @@ services:
                     memory: 200M
     users:
         build:
-            context: ./server/users
+            context: ./users
             dockerfile: dockerfile
         image: carolina-users-server:1.0
         container_name: carolina-users-server
@@ -40,7 +40,7 @@ services:
         ports:
             - 3002:3000
         volumes:
-            - ./server/users:/usr/src/app
+            - ./users:/usr/src/app
         command: ["yarn", "dev"]
         depends_on:
             - database
@@ -53,7 +53,7 @@ services:
                     memory: 200M
     publications:
         build:
-            context: ./server/publications
+            context: ./publications
             dockerfile: dockerfile
         image: carolina-publications-server:1.0
         container_name: carolina-publications-server
@@ -62,7 +62,7 @@ services:
         ports:
             - 3003:3000
         volumes:
-            - ./server/publications:/usr/src/app
+            - ./publications:/usr/src/app
         command: ["yarn", "dev"]
         depends_on:
             - database
@@ -76,7 +76,7 @@ services:
 
     notification:
         build:
-            context: ./server/notification
+            context: ./notification
             dockerfile: dockerfile
         image: carolina-notification-server:1.0
         container_name: carolina-notification-server
@@ -85,7 +85,7 @@ services:
         ports:
             - 3004:3000
         volumes:
-            - ./server/notification:/usr/src/app
+            - ./notification:/usr/src/app
         command: ["yarn", "dev"]
         depends_on:
             - database
@@ -108,7 +108,7 @@ services:
             - RABBITMQ_DEFAULT_USER=guest
             - RABBITMQ_DEFAULT_PASS=guest
         volumes:
-            - ./server/rabbitmq:/var/lib/rabbitmq
+            - ./rabbitmq:/var/lib/rabbitmq
         networks:
             - carolina-network
 
@@ -129,7 +129,7 @@ services:
 
     nginx:
         build:
-            context: ./server/nginx
+            context: ./nginx
             dockerfile: dockerfile
         image: carolina-nginx:1.0
         hostname: carolina-nginx

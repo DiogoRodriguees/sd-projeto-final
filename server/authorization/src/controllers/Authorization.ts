@@ -16,7 +16,7 @@ export class AuthController {
     const user = await this.userService.findByEmail(userDTO.email);
     const authDTO = await this.userService.authenticate(user, userDTO);
     console.log('Proxima linha vai notificar');
-    await this.emailClient.notificateLogin();
+    await this.emailClient.notificateLogin(userDTO);
     return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', authDTO);
   }
 }
