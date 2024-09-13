@@ -10,6 +10,6 @@ export class EmailConsumer {
   @MessagePattern('NOTIFICATE_LOGIN')
   public async notificateUserCreated(userDTO: UserDTO) {
     console.log(userDTO);
-    await this.emailService.sendMail('diogorodrigueslife@gmail.com', 'Login registrado', 'Você fez um novo login na plataforma');
+    await this.emailService.sendMail(userDTO.email, 'Login registrado', 'Você fez um novo login na plataforma');
   }
 }
