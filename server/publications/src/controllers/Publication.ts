@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { PublicationService } from 'src/services/PublicationService';
 import { PublicationDTO } from 'src/shared/dtos/PublicationDTO';
 import { Request } from 'src/shared/dtos/Request';
@@ -23,9 +23,16 @@ export class PublicationsController {
     return new ResponseDTO(HttpStatus.OK, 'Success on list publications', publications);
   }
 
-  @Post('/interesse/:id')
-  @UseGuards(AuthGuard)
-  async markAsInteressed(@Req() req: any, @Param('id') publicationID: number) {
-    return new ResponseDTO(HttpStatus.OK, 'Success on mark publication', []);
-  }
+   // Novo endpoint para listar as publicações dos autores em que o usuário está interessado
+   @Get('/interesse')
+   @UseGuards(AuthGuard)
+   async listByInterest(@Req() req: Request, @Query('autorIds') autorIds: number[]) {
+     // Validação: garantir que a lista de autorIds seja enviada
+     if (!autorIds || autorIds.length === 0) {
+       return new ResponseDTO(HttpStatus.BAD_REQUEST, 'No authors specified', []);
+     }
+ 
+     const publications = await this.publicationService.listByAuthorIds(autorIds);
+     return new ResponseDTO(HttpStatus.OK, 'Success on listing publications by interest', publications);
+   }
 }

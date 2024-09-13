@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Outlet, useNavigate } from 'react-router-
 import LoginPage from "../pages/LoginPage";
 import Cadastro from "../pages/Cadastro";
 import CreatePublicationPage from "../pages/CreatePublicationPage";
+import Publishers from "../pages/Publishers";
 function DefaultRoutes() {
     
     return (
@@ -12,6 +13,7 @@ function DefaultRoutes() {
             <Route path='/login' element={<LoginPage />} />
             <Route path="/register" element={<Cadastro />} />
             <Route path="/createPublication" element={<CreatePublicationPage />} />
+            <Route path="/publishers" element={<Publishers />} />
             <Route path="*" element={<Home />} />
           </Routes>
       </BrowserRouter>

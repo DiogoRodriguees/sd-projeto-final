@@ -44,6 +44,9 @@ function LoginPage() {
       formValues.password
     )
     if (responseLogin.status === HttpStatus.OK) {
+      console.log("responseLogin", responseLogin)
+      const token = responseLogin.data.data.token; // Supondo que o token esteja em responseLogin.data.token
+      localStorage.setItem('token', token);
       notifySuccess("Logado com sucesso!")
       navigate("/home")
     } else {
@@ -59,6 +62,7 @@ function LoginPage() {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#">CAROLINA NEWS</Navbar.Brand>
+          <Button onClick={() => navigate("/home")} variant="outline-success">Voltar!</Button>
         </Container>
       </Navbar>
       <div className="container p-5 col-7">

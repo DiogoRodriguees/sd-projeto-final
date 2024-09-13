@@ -17,6 +17,7 @@ export class UserController {
 
   @Post()
   async register(@Body() userDTO: UserDTO) {
+    console.log('userDTO', userDTO);
     await this.userService.register(userDTO);
     return new ResponseDTO(HttpStatus.CREATED, 'Success on create user');
   }

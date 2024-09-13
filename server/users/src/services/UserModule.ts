@@ -23,7 +23,7 @@ export class UserService {
   }
 
   async register(user: UserDTO) {
-    this.userRepository.register(user);
+    await this.userRepository.register(user);
   }
 
   async list() {
