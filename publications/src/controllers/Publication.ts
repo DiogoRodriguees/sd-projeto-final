@@ -12,8 +12,12 @@ export class PublicationsController {
   @Post()
   @UseGuards(AuthGuard)
   async create(@Req() req: Request, @Body() publicationDTO: PublicationDTO) {
-    const data = await this.publicationService.create(req.user.id, publicationDTO);
-    return new ResponseDTO(HttpStatus.OK, 'Success on create publication', data);
+    try {
+      const data = await this.publicationService.create(req.user.id, publicationDTO);
+      return new ResponseDTO(HttpStatus.CREATED, 'Success on create publication', data);
+    } catch (error) {
+      throw new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong while creating publication: ' + error.message);
+    }
   }
 
   @Get()

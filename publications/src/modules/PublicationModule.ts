@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PublicationEntity } from 'src/@core/entities/PublicationEntity';
+import { CassandraModule } from 'src/cassandra/cassandra.module';
 import { PublicationsController } from 'src/controllers/Publication';
-import { PublicationRepository } from 'src/repositories/PublicationRepository';
 import { PublicationService } from 'src/services/PublicationService';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PublicationEntity])],
-  providers: [PublicationService, PublicationRepository],
+  imports: [CassandraModule],
+  providers: [PublicationService],
   controllers: [PublicationsController],
 })
 export class PublicationModule {}

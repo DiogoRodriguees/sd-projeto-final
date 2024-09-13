@@ -1,5 +1,5 @@
 export class Request {
   user: {
-    id: number;
+    id: string;
   };
 }
