@@ -22,6 +22,7 @@ services:
         command: ["yarn", "dev"]
         depends_on:
             - database
+            - rabbitmq
         networks:
             - carolina-network
         deploy:
@@ -43,6 +44,7 @@ services:
         command: ["yarn", "dev"]
         depends_on:
             - database
+            - rabbitmq
         networks:
             - carolina-network
         deploy:
@@ -64,12 +66,51 @@ services:
         command: ["yarn", "dev"]
         depends_on:
             - database
+            - rabbitmq
         networks:
             - carolina-network
         deploy:
             resources:
                 limits:
                     memory: 200M
+
+    notification:
+        build:
+            context: ./server/notification
+            dockerfile: dockerfile
+        image: carolina-notification-server:1.0
+        container_name: carolina-notification-server
+        hostname: carolina-notification-server
+        restart: always
+        ports:
+            - 3004:3000
+        volumes:
+            - ./notification:/usr/src/app
+        command: ["yarn", "dev"]
+        depends_on:
+            - database
+            - rabbitmq
+        networks:
+            - carolina-network
+        deploy:
+            resources:
+                limits:
+                    memory: 200M
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        hostname: rabbitmq
+        ports:
+            - 5672:5672 # Porta padrão do RabbitMQ
+            - 15672:15672 # Porta para acessar a interface de gerenciamento
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+        volumes:
+            - ./rabbitmq:/var/lib/rabbitmq
+        networks:
+            - carolina-network
 
     database:
         image: postgres:latest
