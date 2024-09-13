@@ -14,9 +14,7 @@ import { UserModule as AuthorizationModule } from './AuthorizationModule';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '../.env',
-    }),
+    ConfigModule.forRoot({}),
     ClientsModule.register(EmailClientConfig),
     TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
     TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),

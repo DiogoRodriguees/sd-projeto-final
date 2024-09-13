@@ -7,7 +7,7 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.RMQ,
     options: {
-      urls: [process.env.RABBITMQ_URL],
+      urls: ['amqp://guest:guest@rabbitmq:5672'],
       queue: 'EMAIL_QUEUE',
       queueOptions: {
         durable: false,

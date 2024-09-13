@@ -17,6 +17,10 @@ Aplicação web com intuito de permitir aos usuários publicar notícias no form
 -   [Cassandra](https://cassandra.apache.org/_/index.html) banco de dados
 -   [Docker](https://www.docker.com/) container e [Docker Compose](https://docs.docker.com/compose/)
 
+## Arquitetura
+
+![](./images/arquitetura.png)
+
 ## Dependencias
 
 -   [NodeJS](https://nodejs.org/en) v22.2.0

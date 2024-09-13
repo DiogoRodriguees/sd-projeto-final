@@ -7,8 +7,8 @@ import { UserRolesEntity } from 'src/@core/entities/UserRolesEntity';
 export class DatabaseConfig {
   public static REGISTER: TypeOrmModuleOptions = {
     type: 'postgres',
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
+    host: 'database',
+    port: 5432,
     username: 'admin',
     password: 'admin',
     database: 'postgres',

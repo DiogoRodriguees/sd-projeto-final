@@ -4,7 +4,6 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmailConsumer } from 'src/consumers/EmailConsumer';
 import { EmailService } from 'src/services/EmailService';
-import { DatabaseConfig } from 'src/shared/config/DatabaseConfig';
 import { JwtConfig } from 'src/shared/config/JwtConfig';
 import { Providers } from 'src/shared/providers/Providers';
 
@@ -13,7 +12,7 @@ import { Providers } from 'src/shared/providers/Providers';
     ConfigModule.forRoot({
       envFilePath: '../.env',
     }),
-    TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
+    // TypeOrmModule.forRoot(DatabaseConfig.REGISTER),
     TypeOrmModule.forFeature([]),
     JwtModule.register(JwtConfig.REGISTER),
   ],
