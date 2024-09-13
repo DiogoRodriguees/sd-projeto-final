@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import Cadastro from "../pages/Cadastro";
 import CreatePublicationPage from "../pages/CreatePublicationPage";
 import Publishers from "../pages/Publishers";
+import Feed from "../pages/Feed";
 function DefaultRoutes() {
     
     return (
@@ -14,6 +15,7 @@ function DefaultRoutes() {
             <Route path="/register" element={<Cadastro />} />
             <Route path="/createPublication" element={<CreatePublicationPage />} />
             <Route path="/publishers" element={<Publishers />} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="*" element={<Home />} />
           </Routes>
       </BrowserRouter>

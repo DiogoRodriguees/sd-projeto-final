@@ -11,6 +11,7 @@ import { Providers } from 'src/shared/providers/Providers';
 import { AppController } from '../controllers/AppController';
 import { AppService } from '../services/AppService';
 import { PublicationModule } from './PublicationModule';
+import { InterestModule } from './InterestModule';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PublicationModule } from './PublicationModule';
     TypeOrmModule.forFeature([UserEntity, RolesEntity, UserRolesEntity]),
     JwtModule.register(JwtConfig.REGISTER),
     PublicationModule,
+    InterestModule
   ],
   controllers: [AppController],
   providers: [AppService, JwtService, Providers.LOGGER_PROVIDER],

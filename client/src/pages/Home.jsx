@@ -30,6 +30,7 @@ function Home() {
                     <Button onClick={() => navigate("/createPublication")} variant="outline-success">Publicar!</Button>
                     <Button onClick={() => navigate("/login")} variant="outline-success">Logar!</Button>
                     <Button onClick={() => navigate("/publishers")} variant="outline-success">Publicadores!</Button>
+                    <Button onClick={() => navigate("/feed")} variant="outline-success">Meu Feed!</Button>
                 </Container>
             </Navbar>
             <Container className="p-5 col-7">

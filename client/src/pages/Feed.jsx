@@ -3,15 +3,14 @@ import { PublicationsAPI } from "../api/publications-api"
 import { HttpStatus } from "../api/default"
 import { Button, Card, Col, Container, Navbar, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { getUsers, UserAPI } from "../api/user-api"
 
-function Publishers() {
+function Feed() {
     const [isFetched, setIsFetched] = useState(false)
     const [data, setData] = useState({})
     const navigate = useNavigate()
-    const getUsers = async (e) => {
+        const getFeed = async (e) => {
         const token = localStorage.getItem('token');
-        const responseCourses = await UserAPI.getUsers(token);
+        const responseCourses = await PublicationsAPI.getInterests(token);
         if (responseCourses.status === HttpStatus.OK) {
             setData(responseCourses.data.data);
             setIsFetched(true);
@@ -19,20 +18,8 @@ function Publishers() {
         }
     }
 
-    const registerUserInterest = async (autorId) => {
-        const token = localStorage.getItem('token'); // Get the token from local storage
-        const userId = localStorage.getItem('userId'); // Get the user ID from local storage
-        const responseInterest = await PublicationsAPI.registerInterest(autorId, token, userId); // Call registerInterest function
-        if (responseInterest.status === HttpStatus.OK) {
-            console.log("Interest registered successfully for autorId:", autorId);
-        } else {
-            console.error("Failed to register interest:", responseInterest.data);
-        }
-    };
-
-
     useEffect(() => {
-        getUsers()
+        getFeed()
     }, [])
 
     return (
@@ -42,7 +29,7 @@ function Publishers() {
                     <Navbar.Brand href="#">CAROLINA NEWS</Navbar.Brand>
                     <Button onClick={() => navigate("/createPublication")} variant="outline-success">Publicar!</Button>
                     <Button onClick={() => navigate("/login")} variant="outline-success">Logar!</Button>
-                    <Button onClick={() => navigate("/home")} variant="outline-success">Home!</Button>
+                    <Button onClick={() => navigate("/publishers")} variant="outline-success">Publicadores!</Button>
                 </Container>
             </Navbar>
             <Container className="p-5 col-7">
@@ -51,14 +38,8 @@ function Publishers() {
                         {data.map((item) => (
                             <Card key={item.id} className="mb-4">
                                 <Card.Body>
-                                    <Card.Title>{item.name}</Card.Title>
-                                    <Card.Text>{item.email}</Card.Text>
-                                    <Button
-                                        variant="primary"
-                                        onClick={() => registerUserInterest(item.id)}
-                                    >
-                                        Register Interest
-                                    </Button>
+                                    <Card.Title>{item.title}</Card.Title>
+                                    <Card.Text>{item.content}</Card.Text>
                                 </Card.Body>
                             </Card>
                         ))}
@@ -71,4 +52,4 @@ function Publishers() {
     );
 }
 
-export default Publishers
+export default Feed

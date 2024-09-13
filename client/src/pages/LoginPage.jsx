@@ -45,8 +45,10 @@ function LoginPage() {
     )
     if (responseLogin.status === HttpStatus.OK) {
       console.log("responseLogin", responseLogin)
-      const token = responseLogin.data.data.token; // Supondo que o token esteja em responseLogin.data.token
+      const token = responseLogin.data.data.token; 
+      const userId = responseLogin.data.data.userId;
       localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
       notifySuccess("Logado com sucesso!")
       navigate("/home")
     } else {

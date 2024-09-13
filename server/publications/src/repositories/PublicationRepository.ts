@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { PublicationEntity } from 'src/@core/entities/PublicationEntity';
 import { PublicationDTO } from 'src/shared/dtos/PublicationDTO';
 
@@ -22,5 +22,12 @@ export class PublicationRepository {
   public async create(publicationDTO: PublicationDTO, autorId: number) {
     const publicationEntity = this.repository.create({ ...publicationDTO, autorId });
     return await this.repository.save(publicationEntity);
+  }
+
+  public async find(id: number[]) {
+    return await this.repository.find({
+      where: { autorId: In(id) }, // Ajuste a lógica para usar a propriedade correta
+      relations: ['autor'], // Inclua outras relações se necessário
+    });
   }
 }

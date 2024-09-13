@@ -8,9 +8,13 @@ export class AuthController {
   constructor(private readonly userService: AuthorizationService) {}
 
   @Post('/sign-in')
-  async signIn(@Body() userDTO: UserDTO) {
-    const user = await this.userService.findByEmail(userDTO.email);
-    const authDTO = await this.userService.authenticate(user, userDTO);
-    return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', authDTO);
+    async signIn(@Body() userDTO: UserDTO) {
+      const user = await this.userService.findByEmail(userDTO.email);
+      const authDTO = await this.userService.authenticate(user, userDTO);
+      const response = {
+          ...authDTO,
+          userId: user.id // Adiciona o ID do usuário à resposta
+      };
+      return new ResponseDTO(HttpStatus.OK, 'Success on sign in user', response);
   }
 }

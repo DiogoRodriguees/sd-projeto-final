@@ -35,4 +35,5 @@ export class PublicationsController {
      const publications = await this.publicationService.listByAuthorIds(autorIds);
      return new ResponseDTO(HttpStatus.OK, 'Success on listing publications by interest', publications);
    }
+   
 }
