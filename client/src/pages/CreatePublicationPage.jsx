@@ -38,7 +38,8 @@ function CreatePublicationPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const responseLogin = await PublicationsAPI.register(formValues)
+        const token = localStorage.getItem('token');
+        const responseLogin = await PublicationsAPI.register(formValues, token)
         if (responseLogin.status === HttpStatus.OK) {
             console.log("CADASTRADO COM SUCESSO")
             notifySuccess("Publicação postada com sucesso!");

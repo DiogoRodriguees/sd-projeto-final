@@ -1,8 +1,11 @@
-export const BASE_URL = "https://66db96a647d749b72ac98bb8.mockapi.io"
+export const AUTH_URL = "http://192.168.85.212:3000"
+export const USER_URL = "http://192.168.85.212:3000"
+export const PUB_URL = "http://192.168.85.212:3000"
 
 export const AUTH_DEBUG = true
 
 export const HttpStatus = {
+  CREATED: 201,
   OK: 200,
   ERROR: 400
 }

@@ -4,13 +4,13 @@ import { HttpStatus } from "../api/default"
 import { Button, Card, Col, Container, Navbar, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 
-function Home() {
+function Feed() {
     const [isFetched, setIsFetched] = useState(false)
     const [data, setData] = useState({})
     const navigate = useNavigate()
-        const getPublications = async (e) => {
+        const getFeed = async (e) => {
         const token = localStorage.getItem('token');
-        const responseCourses = await PublicationsAPI.getPublications(token);
+        const responseCourses = await PublicationsAPI.getInterests(token);
         if (responseCourses.status === HttpStatus.OK) {
             setData(responseCourses.data.data);
             setIsFetched(true);
@@ -19,7 +19,7 @@ function Home() {
     }
 
     useEffect(() => {
-        getPublications()
+        getFeed()
     }, [])
 
     return (
@@ -30,7 +30,6 @@ function Home() {
                     <Button onClick={() => navigate("/createPublication")} variant="outline-success">Publicar!</Button>
                     <Button onClick={() => navigate("/login")} variant="outline-success">Logar!</Button>
                     <Button onClick={() => navigate("/publishers")} variant="outline-success">Publicadores!</Button>
-                    {/* <Button onClick={() => navigate("/feed")} variant="outline-success">Meu Feed!</Button> */}
                 </Container>
             </Navbar>
             <Container className="p-5 col-7">
@@ -53,4 +52,4 @@ function Home() {
     );
 }
 
-export default Home
+export default Feed
